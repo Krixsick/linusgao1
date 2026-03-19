@@ -1,1 +1,41 @@
 @import "tailwindcss";
+@plugin "daisyui";
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+/* font-light*/
+@font-face {
+  font-family: "SF Mono";
+  src: url("./assets/fonts/SF-Mono-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* font-normal*/
+@font-face {
+  font-family: "SF Mono";
+  src: url("./assets/fonts/SF-Mono-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+/* font-medium*/
+@font-face {
+  font-family: "SF Mono";
+  src: url("./assets/fonts/SF-Mono-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+/* font-bold*/
+@font-face {
+  font-family: "SF Mono";
+  src: url("./assets/fonts/SF-Mono-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@theme {
+  --font-mono: "SF Mono", ui-monospace, monospace;
+}
