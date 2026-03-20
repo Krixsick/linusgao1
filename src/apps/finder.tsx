@@ -1,62 +1,39 @@
-const sidebarItems = [
-  { icon: "🖥️", label: "Desktop" },
-  { icon: "📁", label: "Documents" },
-  { icon: "⬇️", label: "Downloads" },
-  { icon: "🎵", label: "Music" },
-  { icon: "🖼️", label: "Pictures" },
-];
-
-const files = [
-  { icon: "📄", name: "README.md", date: "Mar 19, 2026" },
-  { icon: "📁", name: "Projects", date: "Mar 18, 2026" },
-  { icon: "📁", name: "Photos", date: "Mar 15, 2026" },
-  { icon: "📄", name: "notes.txt", date: "Mar 10, 2026" },
-  { icon: "📁", name: "Music", date: "Feb 28, 2026" },
-];
+import { useState } from "react";
 
 export function FinderContent() {
+  const [fileOptions, setFileOptions] = useState<Record<string, boolean>>({
+    Desktop: true,
+    Downloads: false,
+  });
   return (
-    <div className="flex h-full bg-white">
-      {/* Sidebar */}
-      <div className="w-[180px] bg-[#f0f0f0] border-r border-gray-200 p-2 pt-3 flex-shrink-0">
-        <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-1">
+    <div className="w-full h-full flex">
+      {/* Left Side*/}
+      <div className="flex flex-col p-2 bg-[#e8e8e8] w-[20%] h-full border-l">
+        <p className="font-mono text-light opacity-60 text-[gray-300] text-black text-[clamp(8px,2vw,10px)]">
           Favorites
         </p>
-        {sidebarItems.map((item) => (
-          <div
-            key={item.label}
-            className="flex items-center gap-2 px-2 py-1 rounded-md text-sm text-gray-700 hover:bg-blue-500 hover:text-white cursor-pointer transition-colors"
-          >
-            <span>{item.icon}</span>
-            <span>{item.label}</span>
-          </div>
-        ))}
+        {Object.entries(fileOptions).map(([option, state]) => {
+          return (
+            <button
+              onClick={() =>
+                setFileOptions((prev) => {
+                  const updated: Record<string, boolean> = {};
+                  for (const key of Object.keys(prev)) {
+                    updated[key] = key === option;
+                  }
+                  return updated;
+                })
+              }
+              key={option}
+              className={`p-1 rounded-xl w-full text-left font-mono text-light text-black text-[clamp(8px,2vw,14px)] cursor-pointer transition-colors active:bg-white/60 ${state ? "bg-black/10" : ""}`}
+            >
+              {option}
+            </button>
+          );
+        })}
       </div>
-
-      {/* File list */}
-      <div className="flex-1 overflow-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="text-left text-gray-500 border-b border-gray-200">
-              <th className="font-medium py-1 px-3">Name</th>
-              <th className="font-medium py-1 px-3">Date Modified</th>
-            </tr>
-          </thead>
-          <tbody>
-            {files.map((file) => (
-              <tr
-                key={file.name}
-                className="hover:bg-blue-50 cursor-pointer border-b border-gray-100"
-              >
-                <td className="py-1.5 px-3 flex items-center gap-2">
-                  <span>{file.icon}</span>
-                  <span className="text-gray-800">{file.name}</span>
-                </td>
-                <td className="py-1.5 px-3 text-gray-500">{file.date}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="bg-white w-[80%] h-full">
+        {fileOptions["Desktop"] === true ? <div></div> : <div></div>}
       </div>
     </div>
   );

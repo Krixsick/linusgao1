@@ -1,11 +1,9 @@
 import backgroundImg from "../assets/background/DP-15500-007.jpg";
 import terminalIcon from "../assets/icons/Terminal 1.svg";
 import finderIcon from "../assets/icons/Finder 1.svg";
-import { useWindows } from "../context/WindowContext";
-
+import { useWindows } from "../hooks/windowHelper";
 export function Background() {
   const { openWindow } = useWindows();
-
   return (
     <>
       <div className="w-screen h-screen m-0 p-0 relative ">
@@ -17,8 +15,8 @@ export function Background() {
           <div>
             {/* Finder Icon*/}
             <button
-              className="hover:scale-110 transition-transform cursor-pointer flex flex-col items-center gap-1"
               onClick={() => openWindow("finder")}
+              className="hover:scale-110 transition-transform cursor-pointer"
             >
               <img src={finderIcon} />
               <span className="text-white text-xs drop-shadow-md">Finder</span>
@@ -27,8 +25,8 @@ export function Background() {
           <div>
             {/* Terminal Icon*/}
             <button
-              className="hover:scale-110 transition-transform cursor-pointer flex flex-col items-center gap-1"
               onClick={() => openWindow("terminal")}
+              className="hover:scale-110 transition-transform cursor-pointer"
             >
               <img src={terminalIcon} />
               <span className="text-white text-xs drop-shadow-md">
