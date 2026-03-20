@@ -1,11 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-
+//make sure to change wifi and battery to icons
 export function TopBar() {
   const [formatted_date, set_formatted_date] = useState(new Date());
-
-  const computer_details = () => {
-    <div></div>;
-  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,7 +22,7 @@ export function TopBar() {
     minute: "2-digit",
   });
   return (
-    <div className="w-screen h-[30px] opacity-86 fixed bg-white flex items-center justify-between p-2">
+    <div className="w-screen h-[30px] opacity-86 fixed bg-white flex items-center justify-between p-2 z-10">
       <div className="flex ml-4 gap-3 items-center">
         <button
           //   onClick={}

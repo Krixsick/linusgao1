@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 src/assets/fonts
 src/assets/background
+src/assets/icons
+.tanstack
+.claude
