@@ -6,7 +6,8 @@ import { WindowProvider, useWindows } from "../hooks/windowHelper";
 import { Window } from "../apps/window";
 import { TerminalContent } from "../apps/terminal";
 import { FinderContent } from "../apps/finder";
-
+import { files } from "../components/finderFiles";
+import { MarkUpFiles } from "../components/markupfiles";
 function WindowLayer() {
   const { windows, closeWindow, focusWindow } = useWindows();
 
@@ -34,6 +35,29 @@ function WindowLayer() {
       >
         <FinderContent />
       </Window>
+      {/* The MD files and resume*/}
+      {files.map((file, index) => (
+        <Window
+          key={file.id}
+          title={file.name}
+          isOpen={windows[file.id]?.isOpen}
+          zIndex={windows[file.id]?.zIndex ?? 0}
+          onClose={() => closeWindow(file.id)}
+          onFocus={() => focusWindow(file.id)}
+          defaultPosition={{ x: 220 + index * 30, y: 90 + index * 30 }}
+          defaultSize={{ width: 650, height: 480 }}
+        >
+          {file.type === "md" && file.content ? (
+            <MarkUpFiles content={file.content} />
+          ) : (
+            <iframe
+              src={file.src}
+              className="w-full h-full border-0"
+              title={file.name}
+            />
+          )}
+        </Window>
+      ))}
     </>
   );
 }
