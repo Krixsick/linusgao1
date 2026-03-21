@@ -19,6 +19,7 @@ export function Window({
 }: WindowProps) {
   const [position, setPosition] = useState(defaultPosition);
   const [size] = useState(defaultSize);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const dragRef = useRef<{
     startX: number;
     startY: number;
@@ -30,6 +31,7 @@ export function Window({
     (e: MouseEvent) => {
       // Only drag from title bar (not the buttons)
       if ((e.target as HTMLElement).closest(".window-btn")) return;
+      if (isFullscreen) return;
       onFocus();
       dragRef.current = {
         startX: e.clientX,
@@ -38,7 +40,7 @@ export function Window({
         origY: position.y,
       };
     },
-    [position, onFocus],
+    [position, onFocus, isFullscreen],
   );
 
   useEffect(() => {
@@ -64,18 +66,20 @@ export function Window({
     };
   }, []);
 
+  const toggleFullscreen = useCallback(() => {
+    setIsFullscreen((prev) => !prev);
+  }, []);
+
   if (!isOpen) return null;
 
   return (
     <div
-      className="fixed rounded-xl overflow-hidden shadow-2xl border border-gray-300/50"
-      style={{
-        left: position.x,
-        top: position.y,
-        width: size.width,
-        height: size.height,
-        zIndex,
-      }}
+      className={`fixed overflow-hidden shadow-2xl border border-gray-300/50 transition-all duration-300 ${isFullscreen ? "rounded-none" : "rounded-xl"}`}
+      style={
+        isFullscreen
+          ? { left: 0, top: 28, width: "100vw", height: "calc(100vh - 28px)", zIndex }
+          : { left: position.x, top: position.y, width: size.width, height: size.height, zIndex }
+      }
       onMouseDown={onFocus}
     >
       {/* Title bar */}
@@ -96,6 +100,7 @@ export function Window({
           />
           <button
             className="window-btn w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 transition-all"
+            onClick={toggleFullscreen}
             aria-label="Maximize"
           />
         </div>

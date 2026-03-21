@@ -25,6 +25,36 @@ export function MarkUpFiles({ content }: MarkdownViewerProps) {
               {children}
             </p>
           ),
+          a: ({ href, children }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 underline font-mono"
+            >
+              {children}
+            </a>
+          ),
+          strong: ({ children }) => (
+            <strong className="font-bold text-black">{children}</strong>
+          ),
+          em: ({ children }) => (
+            <em className="italic text-gray-700">{children}</em>
+          ),
+          hr: () => <hr className="my-4 border-gray-300" />,
+          ul: ({ children }) => (
+            <ul className="list-disc list-inside mb-4 text-black font-mono">
+              {children}
+            </ul>
+          ),
+          li: ({ children }) => (
+            <li className="leading-relaxed mb-1">{children}</li>
+          ),
+          code: ({ children }) => (
+            <code className="bg-gray-100 text-sm px-1.5 py-0.5 rounded font-mono text-gray-800">
+              {children}
+            </code>
+          ),
         }}
       >
         {content}
