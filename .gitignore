@@ -25,5 +25,6 @@ dist-ssr
 src/assets/fonts
 src/assets/background
 src/assets/icons
+src/vite-env.d.ts
 .tanstack
 .claude
