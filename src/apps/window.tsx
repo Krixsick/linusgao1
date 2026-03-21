@@ -3,7 +3,6 @@ import {
   useRef,
   useCallback,
   useEffect,
-  type ReactNode,
   type MouseEvent,
 } from "react";
 import type { WindowProps } from "../types/windowstype";
@@ -77,8 +76,20 @@ export function Window({
       className={`fixed overflow-hidden shadow-2xl border border-gray-300/50 transition-all duration-300 ${isFullscreen ? "rounded-none" : "rounded-xl"}`}
       style={
         isFullscreen
-          ? { left: 0, top: 28, width: "100vw", height: "calc(100vh - 28px)", zIndex }
-          : { left: position.x, top: position.y, width: size.width, height: size.height, zIndex }
+          ? {
+              left: 0,
+              top: 28,
+              width: "100vw",
+              height: "calc(100vh - 28px)",
+              zIndex,
+            }
+          : {
+              left: position.x,
+              top: position.y,
+              width: size.width,
+              height: size.height,
+              zIndex,
+            }
       }
       onMouseDown={onFocus}
     >
