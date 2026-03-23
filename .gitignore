@@ -22,9 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-src/assets/fonts
-src/assets/background
-src/assets/icons
-src/vite-env.d.ts
-.tanstack
-.claude
+# src/assets/fonts
+# src/assets/background
+# src/assets/icons
+# src/vite-env.d.ts
+# .tanstack
+# .claude
